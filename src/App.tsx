@@ -1,11 +1,14 @@
-import './App.css'
+import './App.css';
+import {Fragment} from "react"
+import Landing from './pages/Landing';
 
 function App() {
 
   return (
-    <div className={`text-3xl`}>
-      Hello World!!
-    </div>
+    <Fragment>
+    {/* <img id='background-image' alt="background gradient"/> */}
+    <Landing/>
+    </Fragment>
   )
 }
 

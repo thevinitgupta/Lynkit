@@ -1,13 +1,11 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+
 import Light from "../assets/light.png"
 import Link from "../assets/logo.png"
 const Landing : React.FC = () => {
   return (
-    <main className={`h-screen w-full font-body app`}>
-      <Navbar/>
-      <section className={`h-[90%] w-full px-5 md:px-10 py-5 flex justify-between`}>
-          <hgroup className={`w-full md:flex-[0.5] flex flex-col justify-center gap-8 h-full text-left text-6xl relative z-1`}>
+    <main className={`h-[90%] w-full px-5 md:px-10 py-5 flex justify-between font-body`}>
+          <hgroup className={`w-full md:flex-[0.5] flex flex-col justify-center gap-8 text-left text-6xl relative z-1`}>
           <img src={Link} alt="background light" className={`md:hidden`} id="background-image"/>
 
             <h1 className={`text-6xl md:text-8xl gradient-text font-[600] font-logo`}>
@@ -22,7 +20,6 @@ const Landing : React.FC = () => {
             <img src={Light} alt="lightning" className={`aspect-square w-full `} />
             <img src={Link} alt="background light" className={``} id="background-image"/>
           </div>
-      </section>
     </main>
   )
 }

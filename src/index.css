@@ -6,8 +6,6 @@
   box-sizing: border-box;
 }
 body {
-  width: 100vw;
-  height: 100vh;
   padding : 0;
   margin : 0;
 }
@@ -18,7 +16,7 @@ body {
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #000;
+  background-color: #040404;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -55,4 +53,7 @@ body {
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+.h-max-screen{
+  max-height: 100vh;
 }

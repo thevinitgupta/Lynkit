@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Glasscard = () => {
+const Glasscard : React.FC = () => {
   return (
     <div>Glasscard</div>
   )

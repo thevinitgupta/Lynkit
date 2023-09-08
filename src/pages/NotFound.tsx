@@ -2,7 +2,7 @@
 import gif from "../assets/404.gif"
 import Link from "../assets/logo.png"
 
-const NotFound = () => {
+const NotFound : React.FC= () => {
   return (
     <main className={`h-[90%] w-full px-5 md:px-10 py-5 flex justify-between font-body`}>
           <hgroup className={`w-full md:flex-[0.5] flex flex-col justify-center gap-8 text-left text-6xl relative z-1`}>

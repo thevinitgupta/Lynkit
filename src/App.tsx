@@ -1,8 +1,6 @@
 import "./App.css";
-
 import Landing from "./pages/Landing";
 import { Route, Routes } from "react-router-dom";
-
 import Auth from "./pages/Auth";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";

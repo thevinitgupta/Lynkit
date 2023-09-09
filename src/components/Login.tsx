@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <form
-      className={`h-full w-full px-[5%] text-white font-heading flex flex-col justify-center items-center gap-2`}
+      className={`h-[95%] w-full px-[5%] text-white font-heading flex flex-col justify-center items-center gap-2`}
     >
       <h1 className={`text-3xl md:text-5xl font-body`}>Welcome back, <span className="gradient-text">Lynker</span></h1>
       <p className={` text-sm opacity-80`}>Login to get your Lynks</p>
@@ -37,7 +37,6 @@ const Login = () => {
         />
       </div>
       <div
-        aria-label="password"
         className={`w-full mt-4 mb-6 flex items-center justify-between text-xl gap-4`}
       >
         <div className="h-full flex items-center">
@@ -56,7 +55,7 @@ const Login = () => {
         </div>
         <Link to="/auth/forgot-password" className={`text-xs sm:text-sm gradient-text`}>Forgot Password</Link>
       </div>
-      <button type="submit" className={`w-[80%] md:w-[50%] rounded-lg text-xl md:text-2xl text-center font-body  text-black hover:text-white py-4 bg-white transition-all hover:bg-transparent`} onMouseEnter={(e)=>{
+      <button type="submit" className={`w-[80%] md:w-[50%] rounded-lg text-xl md:text-2xl text-center font-body  text-black hover:text-white py-4 bg-white transition hover:bg-transparent`} onMouseEnter={(e)=>{
           e.currentTarget.classList.add("gradient");
         }} onMouseLeave={(e)=>{
           e.currentTarget.classList.remove("gradient");

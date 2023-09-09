@@ -40,6 +40,10 @@ body {
   background-repeat: no-repeat;
   backdrop-filter: blur(80px); */
 }
+.blur-bg{
+  filter: blur(80px);
+  z-index: -1;
+}
 
 .gradient {
   background: rgb(255,148,54);
@@ -56,4 +60,10 @@ body {
 }
 .h-max-screen{
   max-height: 100vh;
+}
+.rotate-z-45{
+  transform: rotateZ(45deg);
+}
+.rotate-z-85{
+  transform: rotateZ(85deg);
 }

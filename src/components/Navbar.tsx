@@ -21,7 +21,7 @@ const Navbar : React.FC = () => {
                 <span className={`hidden md:inline-block`}>Code</span>
                 <FaGithub className={`inline-block md:hidden`}/>
               </Link>
-              <Link  to="/auth" className={``}>
+              <Link  to="/profile" className={``}>
                 <span className={`hidden md:inline-block`}>Profile</span>
                 <BsPersonFill className={`inline-block md:hidden`}/>
               </Link>

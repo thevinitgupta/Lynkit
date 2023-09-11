@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Auth from "./pages/Auth";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<Landing />}/>
         
       <Route path="/auth" element={<Auth />} />
+      <Route path="/profile" element={<Profile/> } />
       <Route path="*" element={<NotFound/>}/>
       </Routes>
     </div>

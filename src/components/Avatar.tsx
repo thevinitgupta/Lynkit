@@ -2,20 +2,18 @@ import React from "react";
 
 interface AvatarProps {
   url: string;
-  size: number;
   borderClass: string;
 }
 
 const Avatar = ({
     url = "",
-    size = 10,
     borderClass = "border-teal-400"
 } : AvatarProps) => {
-  console.log(url, size,borderClass);
+  console.log(url,borderClass);
+  
   return (
-    <div>
       <div
-        className={`relative w-${size} h-${size} overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 border-2 border-teal-400`}
+        className={`relative aspect-square $w-full max-w-[250px] md:max-w-none overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 border-2 ${borderClass}`}
       >
         {url.length===0 ? <svg
           className={`absolute w-[120%] h-[120%] text-gray-400 -left-[8%]`}
@@ -29,10 +27,9 @@ const Avatar = ({
             clip-rule="evenodd"
           ></path>
         </svg> : 
-        <img src={url} alt="profile"/>
+        <img loading="lazy" src={url} alt="profile"/>
         }
       </div>
-    </div>
   );
 };
 

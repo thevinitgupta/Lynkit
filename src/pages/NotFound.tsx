@@ -6,7 +6,7 @@ const NotFound : React.FC= () => {
   return (
     <main className={`h-[90%] w-full px-5 md:px-10 py-5 flex justify-between font-body`}>
           <hgroup className={`w-full md:flex-[0.5] flex flex-col justify-center gap-8 text-left text-6xl relative z-1`}>
-          <img src={Link} alt="background light" className={`md:hidden`} id="background-image"/>
+          <img src={Link} alt="background light" className={`bg-center md:hidden`} id="background-image"/>
 
             <h1 className={`text-6xl md:text-8xl gradient-text font-[600] font-logo`}>
             Are you Lost?

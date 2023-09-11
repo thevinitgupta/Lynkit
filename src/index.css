@@ -28,9 +28,6 @@ body {
   /* background-image: url("./assets/background.jpg");
   background-size: cover; */
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   height: 100%;
   filter: blur(120px) opacity(0.6);
   z-index: -1;
@@ -39,6 +36,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   backdrop-filter: blur(80px); */
+}
+.bg-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .blur-bg{
   filter: blur(80px);

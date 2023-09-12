@@ -69,9 +69,50 @@ body {
 .rotate-z-85{
   transform: rotateZ(85deg);
 }
-.lynk-list{
-  scrollbar-width: 0px;
+.card {
+  transition: transform 400ms ease-in-out, shadow 400ms ease-in-out;
 }
-.lynk-list::-webkit-scrollbar {
-    width: 0px;
+
+.card:hover {
+  background-color: rgb(5 21 27);
+  overflow: hidden;
+  position: relative;
+  border : none;
+  transform: scale(1.15);
+  -webkit-box-shadow: 7px 9px 65px -27px rgba(94, 94, 94, 0.605);
+-moz-box-shadow: 7px 9px 65px -27px rgba(94, 94, 94, 0.605);
+box-shadow: 7px 9px 65px -27px rgba(94, 94, 94, 0.605);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card:hover::before{
+  content: '';
+  position: absolute;
+  z-index: 1;
+  width: 20%;
+  height: 400%;
+  background: linear-gradient(90deg, rgba(255,148,54,1) 0%, rgba(242,84,252,1) 61%, rgba(170,10,255,1) 100%);
+  animation: neon 4s linear infinite;
+}
+.card:hover::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 4px;
+  backdrop-filter: blur(120px);
+  background-color: rgba(5, 21, 27, 0.495);
+}
+.content {
+  position: relative;
+  z-index: 10;
+}
+
+@keyframes neon {
+  0%{
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -73,7 +73,9 @@ const handleSection = (e : MouseEvent<HTMLDivElement>) =>{
             />
           </>
         ) : (
-          <LynkList/>
+            <>
+                <LynkList/>
+            </>
         )}
       </section>
     </main>

@@ -66,7 +66,7 @@ const AccountForm = (props: AccountFormProps) => {
         <div className={`flex-1 flex justify-end items-center gap-4`}>
           {props.email}
           <div
-            className={`cursor-pointer text-gray-100 px-4 py-2 font-heading border-2 rounded-lg ${
+            className={`cursor-pointer text-gray-100 px-4 py-2 font-heading border-2 rounded-lg transition-all ${
               verify ? "bg-red-600" : "bg-green-600"
             }`}
           >

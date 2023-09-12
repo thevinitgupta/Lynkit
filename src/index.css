@@ -69,3 +69,9 @@ body {
 .rotate-z-85{
   transform: rotateZ(85deg);
 }
+.lynk-list{
+  scrollbar-width: 0px;
+}
+.lynk-list::-webkit-scrollbar {
+    width: 0px;
+}

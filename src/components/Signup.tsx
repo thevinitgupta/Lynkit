@@ -1,6 +1,16 @@
 import React from "react";
 
-const Signup = () => {
+interface ToastType {
+  message : string, 
+  type : 'success' | 'warn'
+}
+
+interface SignupProps {
+  toastHandler : ({message, type} : ToastType) => void
+}
+
+const Signup = ({toastHandler} : SignupProps) => {
+  console.log(toastHandler);
   return (
     <form
       className={`h-[95%] w-full px-[5%] text-white font-heading flex flex-col justify-center items-center gap-2`}

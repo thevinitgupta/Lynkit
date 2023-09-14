@@ -7,6 +7,7 @@ import LynkList from "../components/LynkList";
 
 type ActiveSection = "profile" | "lynks";
 
+
 const Profile = () => {
   const [activeSection, setActiveSection] = useState<ActiveSection>("profile");
 const handleSection = (e : MouseEvent<HTMLDivElement>) =>{
@@ -19,10 +20,13 @@ const handleSection = (e : MouseEvent<HTMLDivElement>) =>{
         setActiveSection("lynks");
     }
 }
+
+
   return (
     <main
       className={`h-[90%] relative bg-cyan-950/20 w-full px-5 md:px-10 py-10 flex justify-between gap-10 font-body overflow-hidden`}
     >
+      
       {/* background blurs */}
       <img
         src={Link}

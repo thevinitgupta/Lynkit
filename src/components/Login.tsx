@@ -1,11 +1,55 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { MouseEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Login = () => {
+axios.defaults.withCredentials = true;
+
+interface ToastType {
+  message : string, 
+  type : 'success' | 'warn'
+}
+
+interface LoginProps {
+  toastHandler : ({message, type} : ToastType) => void
+}
+
+const Login = ({toastHandler} : LoginProps) => {
+  const navigate = useNavigate();
+  const loginUser = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const body = {
+      "email": "thevinitguptaa@gmail.com",
+      "password": "Vinit@123"
+    }
+    try {
+      const { data, status } = await axios.post("http://localhost:3003/auth/login", body, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true,
+      });
+      if (status === 201) {
+        const toastData : ToastType = {
+          message : "Login Successful",
+          type : 'success'
+        }
+       toastHandler(toastData);
+        console.log(data);
+        setTimeout(()=>{
+          navigate("/profile");
+        },4000)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
+
     <form
       className={`h-[95%] w-full px-[5%] text-white font-heading flex flex-col justify-center items-center gap-2`}
     >
+      
       <h1 className={`text-3xl md:text-5xl font-body`}>Welcome back, <span className="gradient-text">Lynker</span></h1>
       <p className={` text-sm opacity-80`}>Login to get your Lynks</p>
       <div
@@ -55,11 +99,11 @@ const Login = () => {
         </div>
         <Link to="/auth/forgot-password" className={`text-xs sm:text-sm gradient-text`}>Forgot Password</Link>
       </div>
-      <button type="submit" className={`w-[80%] md:w-[50%] rounded-lg text-xl md:text-2xl text-center font-body  text-black hover:text-white py-4 bg-white transition hover:bg-transparent`} onMouseEnter={(e)=>{
-          e.currentTarget.classList.add("gradient");
-        }} onMouseLeave={(e)=>{
-          e.currentTarget.classList.remove("gradient");
-        }}>Login</button>
+      <button type="submit" className={`w-[80%] md:w-[50%] rounded-lg text-xl md:text-2xl text-center font-body  text-black hover:text-white py-4 bg-white transition hover:bg-transparent`} onMouseEnter={(e) => {
+        e.currentTarget.classList.add("gradient");
+      }} onMouseLeave={(e) => {
+        e.currentTarget.classList.remove("gradient");
+      }} onClick={loginUser} >Login</button>
     </form>
   );
 };

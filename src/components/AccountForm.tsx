@@ -1,16 +1,19 @@
 import React, { ChangeEvent } from "react";
 import { useState } from "react";
 
-interface AccountFormProps {
+interface UserData {
   name: string;
   email: string;
-  emailVerified: boolean;
+  verified : boolean;
+}
+interface AccountFormProps {
+  user : UserData
 }
 
-const AccountForm = (props: AccountFormProps) => {
-  const [name, setName] = useState(props.name);
+const AccountForm = ({user}: AccountFormProps) => {
+  const [name, setName] = useState(user.name);
   const [password, setPassword] = useState("");
-  const [verify, setVerify] = useState(!props.emailVerified);
+  const [verify, setVerify] = useState(!user.verified);
   const handleVerification = () => {
     setVerify(!verify);
   };
@@ -64,7 +67,7 @@ const AccountForm = (props: AccountFormProps) => {
           Email Verification{" "}
         </span>
         <div className={`flex-1 flex justify-end items-center gap-4`}>
-          {props.email}
+          {user.email}
           <div
             className={`cursor-pointer text-gray-100 px-4 py-2 font-heading border-2 rounded-lg transition-all ${
               verify ? "bg-red-600" : "bg-green-600"

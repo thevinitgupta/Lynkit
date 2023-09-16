@@ -3,30 +3,80 @@ import Link from "../assets/logo.png";
 import Avatar from "../components/Avatar";
 import AccountForm from "../components/AccountForm";
 import LynkList from "../components/LynkList";
+import { useQuery } from "@tanstack/react-query";
+import axios, { AxiosResponse } from "axios";
 // import LynkData from '../components/LynkData'
 
 type ActiveSection = "profile" | "lynks";
-
+type UserData = {
+  name : string,
+  email : string,
+  _id : string,
+  message : string,
+  verified : boolean
+}
 
 const Profile = () => {
   const [activeSection, setActiveSection] = useState<ActiveSection>("profile");
-const handleSection = (e : MouseEvent<HTMLDivElement>) =>{
-    const label = e.currentTarget.attributes[1].value ;
 
-    if(label ==='profile-nav') {
-        setActiveSection("profile");
+  const getUserData = async() : Promise<UserData> => {
+    try {
+      const response : AxiosResponse = await axios.get("http://localhost:3003/user", {
+        headers : {
+          "Content-Type" : "application/json",
+        },
+        withCredentials: true,
+      });
+      const {status, data } = response;
+      console.log(data)
+      if(status!==200 || !data.user){
+        const nullUser : UserData = {
+          name : "",
+          email : "",
+          _id : "",
+          message : data.message
+        };
+        return nullUser;
+      }
+      return data.user as UserData;
+      
+    } catch (error) {
+      console.log(error);
+      throw new Error("Data Fetching Failed")
     }
-    else if(label==="lynks-nav"){
-        setActiveSection("lynks");
+  }
+  const {data, isLoading, isError} = useQuery<UserData>(
+    {
+      queryKey : ["user"],
+      queryFn : getUserData,
+      
     }
-}
+  )
+  const handleSection = (e: MouseEvent<HTMLDivElement>) => {
+    const label = e.currentTarget.attributes[1].value;
+
+    if (label === 'profile-nav') {
+      setActiveSection("profile");
+    }
+    else if (label === "lynks-nav") {
+      setActiveSection("lynks");
+    }
+  }
+
+  if(isLoading){
+    return <div className="text-5xl">Loading...</div>
+  }
+
+  if(isError){
+    return <div className="text-5xl">Error loading Data</div>
+  }
 
 
   return (
     <main
       className={`h-[90%] relative bg-cyan-950/20 w-full px-5 md:px-10 py-10 flex justify-between gap-10 font-body overflow-hidden`}
     >
-      
+
       {/* background blurs */}
       <img
         src={Link}
@@ -48,7 +98,7 @@ const handleSection = (e : MouseEvent<HTMLDivElement>) =>{
           borderClass={"border-red-400"}
         />
         <div className={` p-2 text-4xl mb-4 text-white/80 text-left cursor-pointer`} aria-label="profile-nav" onClick={handleSection}>
-          Vinit Gupta{" "}
+          {data.name}
         </div>
         <div
           className={`cursor-pointer font-heading p-2 text-xl text-white/80 text-left`} onClick={handleSection} aria-label="lynks-nav"
@@ -71,15 +121,13 @@ const handleSection = (e : MouseEvent<HTMLDivElement>) =>{
               Edit your Lynkit Account 🖊
             </header>
             <AccountForm
-              name={"Vinit Gupta"}
-              email={"thevinitgupta@gmail.com"}
-              emailVerified={false}
+              user={data}
             />
           </>
         ) : (
-            <>
-                <LynkList/>
-            </>
+          <>
+            <LynkList />
+          </>
         )}
       </section>
     </main>

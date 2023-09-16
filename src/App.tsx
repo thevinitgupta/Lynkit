@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 
+
 function App() {
   return (
     <div className={`h-screen w-screen`}>

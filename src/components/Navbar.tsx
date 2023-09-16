@@ -3,8 +3,18 @@ import Logo from "../assets/logo.png"
 import {FaArrowTrendUp, FaGithub} from "react-icons/fa6"
 import {BsPersonFill} from "react-icons/bs"
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { ProfileData, getUserData } from "../utilities/user";
 
 const Navbar : React.FC = () => {
+  const {data, isError} = useQuery<ProfileData>(
+    {
+      queryKey : ["user"],
+      queryFn : getUserData,
+      notifyOnChangeProps : ['data','error'],
+      refetchOnWindowFocus: false
+    }
+  )
   return (
     <nav className={`w-full h-[10%] px-5 md:px-10 py-5 border-b-[1px] border-zinc-500 flex flex-row items-center justify-between gap-4 md:gap-20 navbar`}>
         <div className={`h-full flex-shrink-0 `}>
@@ -21,8 +31,8 @@ const Navbar : React.FC = () => {
                 <span className={`hidden md:inline-block`}>Code</span>
                 <FaGithub className={`inline-block md:hidden`}/>
               </Link>
-              <Link  to="/profile" className={``}>
-                <span className={`hidden md:inline-block`}>Profile</span>
+              <Link to={!data || isError ? "/auth" : "/Profile"} className={``}>
+                <span className={`hidden md:inline-block`}>{!data || isError  ? "Login" : "Profile"}</span>
                 <BsPersonFill className={`inline-block md:hidden`}/>
               </Link>
         </ul>

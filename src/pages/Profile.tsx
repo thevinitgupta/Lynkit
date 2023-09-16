@@ -3,55 +3,38 @@ import Link from "../assets/logo.png";
 import Avatar from "../components/Avatar";
 import AccountForm from "../components/AccountForm";
 import LynkList from "../components/LynkList";
-import { useQuery } from "@tanstack/react-query";
-import axios, { AxiosResponse } from "axios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ProfileData, getUserData, logoutUser } from "../utilities/user";
+import { ApiResponse } from "../types/global";
+import { useNavigate } from "react-router-dom";
 // import LynkData from '../components/LynkData'
 
 type ActiveSection = "profile" | "lynks";
-type UserData = {
-  name : string,
-  email : string,
-  _id : string,
-  message : string,
-  verified : boolean
-}
+
 
 const Profile = () => {
   const [activeSection, setActiveSection] = useState<ActiveSection>("profile");
-
-  const getUserData = async() : Promise<UserData> => {
-    try {
-      const response : AxiosResponse = await axios.get("http://localhost:3003/user", {
-        headers : {
-          "Content-Type" : "application/json",
-        },
-        withCredentials: true,
-      });
-      const {status, data } = response;
-      console.log(data)
-      if(status!==200 || !data.user){
-        const nullUser : UserData = {
-          name : "",
-          email : "",
-          _id : "",
-          message : data.message
-        };
-        return nullUser;
-      }
-      return data.user as UserData;
-      
-    } catch (error) {
-      console.log(error);
-      throw new Error("Data Fetching Failed")
-    }
-  }
-  const {data, isLoading, isError} = useQuery<UserData>(
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  
+  const {data, isLoading, isError} = useQuery<ProfileData>(
     {
       queryKey : ["user"],
       queryFn : getUserData,
       
     }
   )
+
+  const handleLogout = async () => {
+    const response : ApiResponse =  await logoutUser();
+    if(response.status===200){
+    queryClient.invalidateQueries({
+      queryKey : ["user"]
+    })
+    navigate("/auth");
+  }
+  }
+
   const handleSection = (e: MouseEvent<HTMLDivElement>) => {
     const label = e.currentTarget.attributes[1].value;
 
@@ -105,7 +88,7 @@ const Profile = () => {
         >
           Lynks{" "}
         </div>
-        <div className={`font-heading p-2 text-xl text-red-500 text-left cursor-pointer`}>
+        <div onClick={handleLogout} className={`font-heading p-2 text-xl text-red-500 text-left cursor-pointer`}>
           Logout{" "}
         </div>
       </section>

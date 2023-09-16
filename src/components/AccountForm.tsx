@@ -1,11 +1,8 @@
 import React, { ChangeEvent } from "react";
 import { useState } from "react";
+import { UserData } from "../types/global";
 
-interface UserData {
-  name: string;
-  email: string;
-  verified : boolean;
-}
+
 interface AccountFormProps {
   user : UserData
 }

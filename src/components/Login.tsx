@@ -1,6 +1,8 @@
-import React, { MouseEvent } from "react";
+import React, { ChangeEvent, MouseEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { loginUser } from "../utilities/authentication";
+import { ApiResponse } from "../types/global";
 
 axios.defaults.withCredentials = true;
 
@@ -14,35 +16,30 @@ interface LoginProps {
 }
 
 const Login = ({toastHandler} : LoginProps) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const loginUser = async (e: MouseEvent<HTMLButtonElement>) => {
+  const handleLogin = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const body = {
-      "email": "thevinitguptaa@gmail.com",
-      "password": "Vinit@123"
-    }
-    try {
-      const { data, status } = await axios.post("http://localhost:3003/auth/login", body, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true,
-      });
-      if (status === 201) {
-        const toastData : ToastType = {
-          message : "Login Successful",
-          type : 'success'
-        }
-       toastHandler(toastData);
-        console.log(data);
-        setTimeout(()=>{
-          navigate("/profile");
-        },4000)
+    const response : ApiResponse = await loginUser(email,password);
+    if (response.status === 201) {
+      const toastData : ToastType = {
+        message : "Login Successful",
+        type : 'success'
       }
-    } catch (error) {
-      console.log(error);
-    }
+     toastHandler(toastData);
+      console.log(response.data);
+      setTimeout(()=>{
+        navigate("/profile");
+      },4000)
   }
+}
+  const handleUpdate = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "email") setEmail(e.target.value);
+    else if (e.target.name === "password") {
+      setPassword(e.target.value);
+    }
+  };
 
   return (
 
@@ -64,6 +61,8 @@ const Login = ({toastHandler} : LoginProps) => {
           type="email"
           placeholder="Enter your email"
           name="email"
+          value={email}
+          onChange={handleUpdate}
         />
       </div>
       <div
@@ -78,6 +77,8 @@ const Login = ({toastHandler} : LoginProps) => {
           type="password"
           placeholder="Enter your password"
           name="password"
+          value={password}
+          onChange={handleUpdate}
         />
       </div>
       <div
@@ -103,7 +104,7 @@ const Login = ({toastHandler} : LoginProps) => {
         e.currentTarget.classList.add("gradient");
       }} onMouseLeave={(e) => {
         e.currentTarget.classList.remove("gradient");
-      }} onClick={loginUser} >Login</button>
+      }} onClick={handleLogin} >Login</button>
     </form>
   );
 };

@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ProfileData, getUserData, logoutUser } from "../utilities/user";
 import { ApiResponse } from "../types/global";
 import { useNavigate } from "react-router-dom";
+import { useUserLogout } from "../hooks/userData";
 // import LynkData from '../components/LynkData'
 
 type ActiveSection = "profile" | "lynks";
@@ -14,8 +15,6 @@ type ActiveSection = "profile" | "lynks";
 
 const Profile = () => {
   const [activeSection, setActiveSection] = useState<ActiveSection>("profile");
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
   
   const {data, isLoading, isError} = useQuery<ProfileData>(
     {
@@ -24,15 +23,10 @@ const Profile = () => {
       
     }
   )
+  const {mutate} = useUserLogout();
 
-  const handleLogout = async () => {
-    const response : ApiResponse =  await logoutUser();
-    if(response.status===200){
-    queryClient.invalidateQueries({
-      queryKey : ["user"]
-    })
-    navigate("/auth");
-  }
+  const handleLogout = () => {
+    mutate()
   }
 
   const handleSection = (e: MouseEvent<HTMLDivElement>) => {

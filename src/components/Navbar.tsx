@@ -12,7 +12,7 @@ const Navbar : React.FC = () => {
       queryKey : ["user"],
       queryFn : getUserData,
       notifyOnChangeProps : ['data','error'],
-      refetchOnWindowFocus: false
+      staleTime : 60000
     }
   )
   return (

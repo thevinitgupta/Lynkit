@@ -3,10 +3,8 @@ import Link from "../assets/logo.png";
 import Avatar from "../components/Avatar";
 import AccountForm from "../components/AccountForm";
 import LynkList from "../components/LynkList";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ProfileData, getUserData, logoutUser } from "../utilities/user";
-import { ApiResponse } from "../types/global";
-import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { ProfileData, getUserData } from "../utilities/user";
 import { useUserLogout } from "../hooks/userData";
 // import LynkData from '../components/LynkData'
 
@@ -51,7 +49,7 @@ const Profile = () => {
 
   return (
     <main
-      className={`h-[90%] relative bg-cyan-950/20 w-full px-5 md:px-10 py-10 flex justify-between gap-10 font-body overflow-hidden`}
+      className={`h-[90%] relative bg-cyan-950/20 w-full px-5 md:px-10 py-10 flex flex-col sm:flex-row justify-between gap-10 font-body overflow-hidden`}
     >
 
       {/* background blurs */}
@@ -68,11 +66,11 @@ const Profile = () => {
 
       {/* left section */}
       <section
-        className={`h-full flex-[0.25] flex flex-col justify-center items-center gap-4`}
+        className={`h-[10rem] sm:h-full flex-[0.25] flex flex-row sm:flex-col justify-center items-center gap-4`}
       >
         <Avatar
           url={"https://avatars.githubusercontent.com/u/65801700?v=4"}
-          borderClass={"border-red-400"}
+          borderClass={"border-red-400 h-full sm:h-auto"}
         />
         <div className={` p-2 text-4xl mb-4 text-white/80 text-left cursor-pointer`} aria-label="profile-nav" onClick={handleSection}>
           {data.name}

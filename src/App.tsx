@@ -5,6 +5,7 @@ import Auth from "./pages/Auth";
 import Navbar from "./components/Navbar";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
+import Lynk from "./pages/Lynk";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         
       <Route path="/auth" element={<Auth />} />
       <Route path="/profile" element={<Profile/> } />
+      <Route path="/create" element={<Lynk/> } />
       <Route path="*" element={<NotFound/>}/>
       </Routes>
     </div>

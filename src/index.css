@@ -47,6 +47,11 @@ body {
   z-index: -1;
 }
 
+.blur-op{
+  filter: blur(120px) opacity(0.6);
+  z-index: -1;
+}
+
 .gradient {
   background: rgb(255,148,54);
   background: linear-gradient(90deg, rgba(255,148,54,1) 0%, rgba(242,84,252,1) 61%, rgba(170,10,255,1) 100%); 

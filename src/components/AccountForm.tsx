@@ -63,7 +63,7 @@ const AccountForm = ({user}: AccountFormProps) => {
         <span className="font-body flex-[0.4] text-xl md:text-2xl">
           Email Verification{" "}
         </span>
-        <div className={`flex-1 flex justify-end items-center gap-4`}>
+        <div className={`flex-1 flex flex-col md:flex-row justify-end items-center gap-4`}>
           {user.email}
           <div
             className={`cursor-pointer text-gray-100 px-4 py-2 font-heading border-2 rounded-lg transition-all ${
@@ -97,7 +97,7 @@ const AccountForm = ({user}: AccountFormProps) => {
           </p>
         </div>
       </div>
-      <button type="submit" className={`w-[80%] md:w-[30%] min-w-[200px] rounded-lg text-xl md:text-2xl my-5 mt-10 mx-[10%] md:mx-[35%] text-center font-body  text-black hover:text-white py-4 bg-white transition hover:bg-transparent`} onMouseEnter={(e)=>{
+      <button type="submit" className={`w-[80%] md:w-[30%] min-w-[200px] rounded-lg text-xl md:text-2xl my-5 mt-10 mx-[10%] md:mx-[35%] text-center font-body  text-black hover:text-white py-4 bg-white transition-all hover:bg-transparent`} onMouseEnter={(e)=>{
           e.currentTarget.classList.add("gradient");
         }} onMouseLeave={(e)=>{
           e.currentTarget.classList.remove("gradient");

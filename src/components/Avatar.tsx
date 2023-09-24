@@ -13,7 +13,7 @@ const Avatar = ({
   
   return (
       <div
-        className={`relative aspect-square $w-full max-w-[250px] md:max-w-none overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 border-2 ${borderClass}`}
+        className={`relative aspect-square min-w-[100px] max-w-[250px] md:max-w-none max-h-[100px] sm:max-h-none overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 border-2 ${borderClass}`}
       >
         {url.length===0 ? <svg
           className={`absolute w-[120%] h-[120%] text-gray-400 -left-[8%]`}
@@ -27,7 +27,7 @@ const Avatar = ({
             clip-rule="evenodd"
           ></path>
         </svg> : 
-        <img loading="lazy" src={url} alt="profile"/>
+        <img loading="lazy" className="h-full" src={url} alt="profile"/>
         }
       </div>
   );

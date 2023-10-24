@@ -14,6 +14,7 @@ export const useUserLogout = () => {
         {
             onSuccess: async (data) => {
                 queryClient.invalidateQueries(["user"]);
+                queryClient.invalidateQueries(["user-lynks"]);
 
                 console.log("Successfull : " + data.data)
                 setTimeout(()=>{

@@ -8,11 +8,15 @@ export const useUserLogout = () => {
     console.log("logout");
     return useMutation(
         () =>
-            axios.post("http://localhost:3003/auth/logout", {
-                withCredentials: true
+            axios.post("http://localhost:3003/auth/logout", {}, {
+                withCredentials: true,
+                headers : {
+                    "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
+                }
             }),
         {
             onSuccess: async (data) => {
+                localStorage.removeItem("lynkit-user")
                 queryClient.invalidateQueries(["user"]);
                 queryClient.invalidateQueries(["user-lynks"]);
 

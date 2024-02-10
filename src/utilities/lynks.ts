@@ -17,8 +17,13 @@ export const useCreateLynk = () => {
     queryClient.invalidateQueries(["user-lynks"]);
     return useMutation((link : string) => {
         return axios.post("http://localhost:3003/lynk/create", {
-            withCredentials : true,
+            
             link
+        }, {
+          withCredentials : true,
+          headers : {
+            "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
+          }
         })}
     )
 }
@@ -28,6 +33,7 @@ const getLynks  = async() : Promise<LynkData[]> => {
       const response : AxiosResponse = await axios.get("http://localhost:3003/lynk", {
         headers : {
           "Content-Type" : "application/json",
+          "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
         },
         withCredentials: true,
       });

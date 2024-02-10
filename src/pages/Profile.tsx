@@ -16,7 +16,7 @@ const Profile = () => {
   
   const {data, isLoading, isError} = useQuery<ProfileData>(
     {
-      queryKey : ["user"],
+      queryKey : ["user", 'error'],
       queryFn : getUserData,
       
     }

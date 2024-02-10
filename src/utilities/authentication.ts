@@ -9,28 +9,31 @@ export const loginUser = async (email: string, password: string) => {
         password
     }
     try {
-        const { data, status } = await axios.post("http://localhost:3003/auth/login", body, {
+        const {data : response , status } = await axios.post("http://localhost:3003/auth/login", body, {
             headers: {
                 'Content-Type': 'application/json'
             },
             withCredentials: true,
         });
+        console.log(response);
         const result: ApiResponse = {
             status: status,
             data: "",
-            error: ""
+            error: "",
+            token : response?.token
         }
-        if (status !== 201 || !data) {
-            result.error = data.message;
+        if (status !== 201 || !response) {
+            result.error = response?.message;
         }
-        else result.data = data.data;
+        else result.data = response?.data;
         return result;
     } catch (error) {
         console.log(error);
         const result: ApiResponse = {
             status: 500,
             data: "",
-            error: error instanceof Error ? error.message : "Something went wrong"
+            error: error instanceof Error ? error.message : "Something went wrong",
+            token : null
         }
         return result;
     }

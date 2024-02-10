@@ -11,8 +11,8 @@ const Navbar : React.FC = () => {
     {
       queryKey : ["user"],
       queryFn : getUserData,
-      notifyOnChangeProps : ['data','error'],
-      staleTime : 60000
+      notifyOnChangeProps : ['data', 'error'],
+      staleTime : 30*60*1000
     }
   )
   return (

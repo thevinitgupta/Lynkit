@@ -10,6 +10,7 @@ export const getUserData = async() : Promise<ProfileData> => {
       const response : AxiosResponse = await axios.get("http://localhost:3003/user", {
         headers : {
           "Content-Type" : "application/json",
+          "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
         },
         withCredentials: true,
       });
@@ -44,7 +45,8 @@ export const logoutUser = async () => {
         const result: ApiResponse = {
             status: status,
             data: "",
-            error: ""
+            error: "",
+            token : null
         }
         if (status !== 200 || !data) {
             result.error = data.message;
@@ -56,7 +58,8 @@ export const logoutUser = async () => {
         const result: ApiResponse = {
             status: 500,
             data: "",
-            error: error instanceof Error ? error.message : "Something went wrong"
+            error: error instanceof Error ? error.message : "Something went wrong",
+            token: null
         }
         return result;
     }

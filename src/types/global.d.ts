@@ -8,5 +8,6 @@ export interface UserData {
 export interface ApiResponse {
   status : number,
   data : UserData | string,
-  error : Error | string
+  error : Error | string,
+  token : null | string
 }

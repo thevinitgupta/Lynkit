@@ -22,16 +22,24 @@ const Login = ({toastHandler} : LoginProps) => {
   const handleLogin = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const response : ApiResponse = await loginUser(email,password);
-    if (response.status === 201) {
+    if (response.status === 201 && response.token!==null) {
       const toastData : ToastType = {
         message : "Login Successful",
         type : 'success'
       }
+
+    localStorage.setItem('lynkit-user', response?.token);
      toastHandler(toastData);
       console.log(response.data);
       setTimeout(()=>{
         navigate("/profile");
       },4000)
+  }else {
+    const toastData : ToastType = {
+      message : "Login Unsuccesful",
+      type : "warn"
+    }
+    toastHandler(toastData);
   }
 }
   const handleUpdate = (e: ChangeEvent<HTMLInputElement>) => {

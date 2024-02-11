@@ -1,5 +1,5 @@
-import axios from "axios";
-import { ApiResponse } from "../types/global";
+import { LoginApiResponse } from "../types/global";
+import { authApi } from "./wrapper";
 
 
 
@@ -9,14 +9,13 @@ export const loginUser = async (email: string, password: string) => {
         password
     }
     try {
-        const {data : response , status } = await axios.post("http://localhost:3003/auth/login", body, {
+        const {data : response , status } = await authApi.post("/login", body, {
             headers: {
                 'Content-Type': 'application/json'
             },
-            withCredentials: true,
         });
         console.log(response);
-        const result: ApiResponse = {
+        const result: LoginApiResponse = {
             status: status,
             data: "",
             error: "",
@@ -29,7 +28,7 @@ export const loginUser = async (email: string, password: string) => {
         return result;
     } catch (error) {
         console.log(error);
-        const result: ApiResponse = {
+        const result: LoginApiResponse = {
             status: 500,
             data: "",
             error: error instanceof Error ? error.message : "Something went wrong",

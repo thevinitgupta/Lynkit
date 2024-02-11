@@ -1,10 +1,7 @@
-import React, { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { loginUser } from "../utilities/authentication";
-import { ApiResponse } from "../types/global";
-
-axios.defaults.withCredentials = true;
+import { LoginApiResponse } from "../types/global";
 
 interface ToastType {
   message : string, 
@@ -21,7 +18,7 @@ const Login = ({toastHandler} : LoginProps) => {
   const navigate = useNavigate();
   const handleLogin = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const response : ApiResponse = await loginUser(email,password);
+    const response : LoginApiResponse = await loginUser(email,password);
     if (response.status === 201 && response.token!==null) {
       const toastData : ToastType = {
         message : "Login Successful",

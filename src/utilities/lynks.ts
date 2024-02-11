@@ -1,5 +1,6 @@
 import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query"
-import axios, { AxiosResponse } from "axios";
+import  { AxiosResponse } from "axios";
+import { authApi, dataApi } from "./wrapper";
 export interface LynksArray {
     lynks: LynkData[]
   }
@@ -16,26 +17,18 @@ export const useCreateLynk = () => {
     const queryClient = useQueryClient();
     queryClient.invalidateQueries(["user-lynks"]);
     return useMutation((link : string) => {
-        return axios.post("http://localhost:3003/lynk/create", {
-            
+        return dataApi.post("/lynk/create", {
             link
-        }, {
-          withCredentials : true,
-          headers : {
-            "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
-          }
         })}
     )
 }
 
 const getLynks  = async() : Promise<LynkData[]> => {
     try {
-      const response : AxiosResponse = await axios.get("http://localhost:3003/lynk", {
+      const response : AxiosResponse = await dataApi.get("/lynk", {
         headers : {
           "Content-Type" : "application/json",
-          "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
         },
-        withCredentials: true,
       });
       const {status, data } = response;
       console.log(data)

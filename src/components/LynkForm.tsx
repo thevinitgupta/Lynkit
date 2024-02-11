@@ -51,7 +51,7 @@ const LynkForm = () => {
 
   else if(lynkCreationError){
     return <section className={`group h-4/5 w-[95%] max-w-[40rem] mx-auto my-10 px-5 py-5 border border-zinc-600/30 rounded-xl overflow-hidden relative`}>
-      <p className='font-2xl font-heading text-red-500'>
+      <p className='text-2xl font-heading text-red-500'>
         Error while creating Lynk.
         </p>
     </section>

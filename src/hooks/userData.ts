@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { dataApi } from "../utilities/wrapper";
 
 export const useUserLogout = () => {
     const queryClient = useQueryClient();
@@ -8,12 +8,7 @@ export const useUserLogout = () => {
     console.log("logout");
     return useMutation(
         () =>
-            axios.post("http://localhost:3003/auth/logout", {}, {
-                withCredentials: true,
-                headers : {
-                    "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
-                }
-            }),
+            dataApi.post("/auth/logout", {}),
         {
             onSuccess: async (data) => {
                 localStorage.removeItem("lynkit-user")

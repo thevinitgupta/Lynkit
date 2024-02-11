@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { ApiResponse, UserData } from "../types/global";
+import { dataApi } from "./wrapper";
 
 export interface ProfileData extends UserData {
     message : string;
@@ -7,12 +8,10 @@ export interface ProfileData extends UserData {
 
 export const getUserData = async() : Promise<ProfileData> => {
     try {
-      const response : AxiosResponse = await axios.get("http://localhost:3003/user", {
+      const response : AxiosResponse = await dataApi.get("/user", {
         headers : {
           "Content-Type" : "application/json",
-          "Authorization" : `Bearer ${localStorage.getItem("lynkit-user")}`
         },
-        withCredentials: true,
       });
       const {status, data } = response;
       console.log(data)
@@ -36,7 +35,7 @@ export const getUserData = async() : Promise<ProfileData> => {
 
 export const logoutUser = async () => {
     try {
-        const { data, status } = await axios.post("http://localhost:3003/auth/logout", {
+        const { data, status } = await dataApi.post("/auth/logout", {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -46,7 +45,6 @@ export const logoutUser = async () => {
             status: status,
             data: "",
             error: "",
-            token : null
         }
         if (status !== 200 || !data) {
             result.error = data.message;
@@ -59,7 +57,6 @@ export const logoutUser = async () => {
             status: 500,
             data: "",
             error: error instanceof Error ? error.message : "Something went wrong",
-            token: null
         }
         return result;
     }
